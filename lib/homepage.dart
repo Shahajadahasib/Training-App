@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List info = [];
+  _initData() {
+    DefaultAssetBundle.of(context).loadString("json/info.json").then((value) {
+      info = json.decode(value);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -270,19 +285,22 @@ class _HomePageState extends State<HomePage> {
                 physics: BouncingScrollPhysics(),
                 separatorBuilder: (BuildContext context, int index) =>
                     const Divider(),
-                itemCount: 4,
+                itemCount: (info.length.toDouble() / 2).toInt(),
                 itemBuilder: (_, i) {
+                  int a = 2 * i;
+                  int b = 2 * i + 1;
                   return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 150,
-                        height: 170,
+                        width: 160,
+                        height: 160,
                         padding: EdgeInsets.only(bottom: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: NetworkImage("https://picsum.photos/200"),
+                            image: AssetImage(info[a]['img']),
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -295,7 +313,35 @@ class _HomePageState extends State<HomePage> {
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "flues",
+                              info[a]["title"],
+                              style:
+                                  TextStyle(fontSize: 17, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 160,
+                        height: 160,
+                        padding: EdgeInsets.only(bottom: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(info[b]['img']),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                offset: Offset(5, 5),
+                                color: Colors.grey)
+                          ],
+                        ),
+                        child: Center(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              info[b]["title"],
                               style:
                                   TextStyle(fontSize: 17, color: Colors.white),
                             ),
