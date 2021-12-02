@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    height: 100,
+                    // height: 80,
                     margin: EdgeInsets.only(left: 140),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -282,19 +282,22 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: ListView.separated(
+                shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
                 separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
+                    const SizedBox(
+                  height: 15,
+                ),
                 itemCount: (info.length.toDouble() / 2).toInt(),
                 itemBuilder: (_, i) {
                   int a = 2 * i;
                   int b = 2 * i + 1;
                   return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        width: 160,
-                        height: 160,
+                        width: 150,
+                        height: 150,
                         padding: EdgeInsets.only(bottom: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
@@ -321,8 +324,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Container(
-                        width: 160,
-                        height: 160,
+                        width: 150,
+                        height: 150,
                         padding: EdgeInsets.only(bottom: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
