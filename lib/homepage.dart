@@ -3,6 +3,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'Video.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 70, left: 30, right: 30),
+        padding: EdgeInsets.only(top: 60, left: 30, right: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -61,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SizedBox(
-              height: 30,
+              height: 25,
             ),
             Row(
               children: [
@@ -85,9 +88,14 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: 5,
                 ),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.blue,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => VideoInfo());
+                  },
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                  ),
                 ),
               ],
             ),
