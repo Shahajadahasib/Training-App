@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
               height: 25,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Your program",
@@ -75,26 +76,30 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Expanded(
-                  child: Container(),
-                ),
-                Text(
-                  "Details",
-                  style: TextStyle(
-                    fontSize: 19,
-                    color: Colors.blue,
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
+                // Expanded(
+                //   child: Container(),
+                // ),
                 InkWell(
                   onTap: () {
                     Get.to(() => VideoInfo());
                   },
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 20,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Details",
+                        style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                    ],
                   ),
                 ),
               ],

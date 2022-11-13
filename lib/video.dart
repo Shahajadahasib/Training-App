@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
@@ -188,7 +187,13 @@ class _VideoInfoState extends State<VideoInfo> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  debugPrint('tapped');
+                                  _controller!.pause();
+                                  setState(() {
+                                    if (_playArea == true) {
+                                      _playArea = false;
+                                    }
+                                  });
+                                  // debugPrint('tapped');
                                 },
                                 child: Icon(
                                   Icons.arrow_back_ios,
@@ -277,7 +282,7 @@ class _VideoInfoState extends State<VideoInfo> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FlatButton(
+          ElevatedButton(
             onPressed: () async {
               final index = _isPlayingIndex - 1;
               if (index >= 0 && videoinfo.length >= 0) {
@@ -292,7 +297,7 @@ class _VideoInfoState extends State<VideoInfo> {
               color: Colors.white,
             ),
           ),
-          FlatButton(
+          ElevatedButton(
             onPressed: () async {
               if (_isPlaying) {
                 setState(() {
@@ -312,7 +317,7 @@ class _VideoInfoState extends State<VideoInfo> {
               color: Colors.white,
             ),
           ),
-          FlatButton(
+          ElevatedButton(
             onPressed: () async {
               final index = _isPlayingIndex + 1;
               if (index <= videoinfo.length - 1) {
@@ -410,7 +415,7 @@ class _VideoInfoState extends State<VideoInfo> {
         return GestureDetector(
             onTap: () {
               _onTapVideo(index);
-              debugPrint(index.toString());
+              // debugPrint(index.toString());
 
               setState(() {
                 if (_playArea == false) {
